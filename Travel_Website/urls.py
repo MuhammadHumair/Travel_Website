@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'Travello Admin'
+admin.site.site_title = 'Travello Admin Panel'
+admin.site.index_title = 'Welcome to Travello Admin Panel'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('travello.urls'))
