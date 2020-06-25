@@ -22,5 +22,6 @@ admin.site.index_title = 'Welcome to Travello Admin Panel'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('travello.urls'))
+    path('', include('travello.urls')),
+    path('account/', include('account.urls'))
 ]
