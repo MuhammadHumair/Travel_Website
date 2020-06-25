@@ -10,6 +10,11 @@
 <!-- Custom Theme files -->
 <link href={% static 'styles/register.css' %} rel="stylesheet" type="text/css" media="all" />
 <!-- //Custom Theme files -->
+<!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- //Bootstrap CDN -->
 <!-- web font -->
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <!-- //web font -->
@@ -20,12 +25,21 @@
 		<h1>Login Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="#" method="post">
-					<input class="text" id="login_inputfield_margin" type="text" name="Username" placeholder="Username" required="">
-					<input class="text" id="login_inputfield_margin" type="password" name="password" placeholder="Password" required="">
+				{% for message in messages %}
+					{% if message %}
+						<div class="alert alert-{{message.tags}} alert-dismissible">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>{{message.tags.title}}!</strong> {{message}}
+						</div>
+					{% endif %}
+				{% endfor %}
+				<form action="{% url 'login' %}" method="post">
+					{% csrf_token %}
+					<input class="text" id="login_inputfield_margin" type="text" name="username" placeholder="Username" required="True">
+					<input class="text" id="login_inputfield_margin" type="password" name="password" placeholder="Password" required="True">
 					<div class="wthree-text">
 						<label class="anim">
-							<input type="checkbox" class="checkbox" required="">
+							<input type="checkbox" class="checkbox" required="True">
 							<span>Remember Password?</span>
 						</label>
 						<div class="clear"> </div>
