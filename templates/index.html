@@ -35,9 +35,8 @@
 									<li><a href="#">About</a></li>
 									<li><a href="#">Services</a></li>
 									<li><a href="contact.html">Contact</a></li>
-									{% if user.is_authenticated %}
-										<li>Hello, {{user.first_name}}</li>
-										<li><a href="account/logout">Logout</a></li>
+									{% if 'username' in request.session %}
+										<li><a href="userpanel/">My Account</a></li>
 									{% else %}
 									<li><a href="account/login">Login</a></li>
 									{% endif %}

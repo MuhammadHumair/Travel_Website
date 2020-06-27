@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.contrib import messages, sessions
 from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
 def register(request):
-    if request.method== 'POST':
+    if request.method == 'POST':
         fname = request.POST['fname']
         lname = request.POST['lname']
         uname = request.POST['username']
@@ -40,8 +40,9 @@ def login(request):
 
         if data is not None:
             auth.login(request, data)
+            request.session['username'] = data.username
             #messages.success(request, "Login Successfully...!!!")
-            return redirect('/')
+            return redirect('/userpanel/')
         else:
             messages.info(request, "Login and Password not matched...!!!")
             return redirect('login')
@@ -50,5 +51,7 @@ def login(request):
 
 
 def logout(request):
+    if 'username' in request.session:
+        del request.session['username']
     auth.logout(request)
     return redirect("/")
